@@ -20,10 +20,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void showExternalWebPage(){
         // TODO: Add your code for showing external web page here
+        this.webView.loadUrl("https://his.se");
     }
 
     public void showInternalWebPage(){
         // TODO: Add your code for showing internal web page here
+        this.webView.loadUrl("file:///android_asset/index.html");
     }
 
     @Override
@@ -59,10 +61,11 @@ public class MainActivity extends AppCompatActivity {
         */
 
         this.webView = findViewById(R.id.webView);
-        this.webView.loadUrl("https://his.se");
 
         WebSettings webSettings = this.webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+
+        this.showExternalWebPage();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
