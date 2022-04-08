@@ -1,42 +1,84 @@
 
 # Rapport
 
-**Skriv din rapport här!**
+### Ändringar!
 
-_Du kan ta bort all text som finns sedan tidigare_.
+1. Ändrade namn på appen.
 
-## Följande grundsyn gäller dugga-svar:
+``
+<resources>
+<string name="app_name">Kaffemaskin</string>
+<string name="action_external_web">External Web Page</string>
+<string name="action_internal_web">Internal Web Page</string>
+</resources>
+``
 
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
+2. Gav tillåtelse att visitera externa webbplatser.
 
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
+``
+<uses-permission android:name="android.permission.INTERNET" />
+``
 
-```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
+3. Instanserade WebView objekt som privat-medlem hos 'MainActivity'
+
+``
+    private WebView webView;
+``
+
+3.1 Implementerar 'webview' hos 'onCreate' metoden
+
+``
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+Toolbar toolbar = findViewById(R.id.toolbar);
+setSupportActionBar(toolbar);
+
+        this.webView = findViewById(R.id.webView);
+
+        WebSettings webSettings = this.webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
-}
-```
+``
 
-Bilder läggs i samma mapp som markdown-filen.
+4. Lade till en 'assets' folder samt en html fil 'index.html'
 
-![](android.png)
+![dump2.jpg](dump2.jpg)
 
-Läs gärna:
+5. Implementerade metoderna showExternalWebpage och showInternalWebpage med hjälp av webview objektet.
 
-- Boulos, M.N.K., Warren, J., Gong, J. & Yue, P. (2010) Web GIS in practice VIII: HTML5 and the canvas element for interactive online mapping. International journal of health geographics 9, 14. Shin, Y. &
-- Wunsche, B.C. (2013) A smartphone-based golf simulation exercise game for supporting arthritis patients. 2013 28th International Conference of Image and Vision Computing New Zealand (IVCNZ), IEEE, pp. 459–464.
-- Wohlin, C., Runeson, P., Höst, M., Ohlsson, M.C., Regnell, B., Wesslén, A. (2012) Experimentation in Software Engineering, Berlin, Heidelberg: Springer Berlin Heidelberg.
+``
+    public void showExternalWebPage(){
+        this.webView.loadUrl("https://his.se");
+    }
+    
+    public void showInternalWebPage(){
+        this.webView.loadUrl("file:///android_asset/index.html");
+    }
+``
+
+6. Implementerade in showExternalWebpage och showInternalWebpage in till respektive event-kallning.
+
+``
+    //noinspection SimplifiableIfStatement
+    if (id == R.id.action_external_web) {
+        this.showExternalWebPage();
+        return true;
+    }
+    if (id == R.id.action_internal_web) {
+        this.showInternalWebPage();
+        return true;
+    }
+``
+
+![dump2.jpg](dump2.jpg)
