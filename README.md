@@ -53,7 +53,7 @@ setSupportActionBar(toolbar);
 
 4. Lade till en 'assets' folder samt en html fil 'index.html'
 
-![dump1.jpg](./dump1.jpg)
+![dump1.jpg](dump1.jpg)
 
 5. Implementerade metoderna showExternalWebpage och showInternalWebpage med hjälp av webview objektet.
 
@@ -81,4 +81,5 @@ setSupportActionBar(toolbar);
     }
 ``
 
-![dump2.jpg](./dump2.jpg)
+![dump2.jpg](dump2.jpg)
+
