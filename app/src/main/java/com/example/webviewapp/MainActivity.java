@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -13,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
+
+    private WebView webView;
 
     public void showExternalWebPage(){
         // TODO: Add your code for showing external web page here
@@ -53,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
            showing your App. One (1) screenshot showing your internal web page and
            one (1) screenshot showing your external web page.
         */
+
+        this.webView = findViewById(R.id.webView);
+        this.webView.loadUrl("https://his.se");
+
+        WebSettings webSettings = this.webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
