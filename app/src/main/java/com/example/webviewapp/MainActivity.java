@@ -65,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
         WebSettings webSettings = this.webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        this.showExternalWebPage();
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,12 +91,12 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_external_web) {
-            Log.d("==>","Will display external web page");
+            this.showExternalWebPage();
             return true;
         }
 
         if (id == R.id.action_internal_web) {
-            Log.d("==>","Will display internal web page");
+            this.showInternalWebPage();
             return true;
         }
 
